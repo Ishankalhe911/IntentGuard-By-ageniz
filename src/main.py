@@ -1778,7 +1778,7 @@ def create_app(
                 res.repeat_count == 0
                 and not prior_active_seat
                 and total_qty == 1
-                and not oid.startswith("DEMO-SAAS-HOLD-")
+                and not oid.startswith(("DEMO-SAAS-HOLD-", "P4-ORD-SAAS-HOLD"))
                 and not res.is_flagged
                 and res.has_reliable_identity
                 and not res.has_prompt_injection_signal
@@ -2766,7 +2766,7 @@ def create_app(
         page = page.replace('<button class="ctrl-btn" onclick="runReconcile()">Reconcile</button>', '')
         return HTMLResponse(content=page)
 
-    @app.get("/healthz")
+    @app.api_route("/healthz", methods=["GET", "HEAD"])
     def healthcheck() -> dict:
         from src.pillar4_dashboard_api.routes.kill_switch import _resolve_configured_admin_key
         from src.pillar4_dashboard_api.routes.mcp_gate import _resolve_configured_merchant_key
