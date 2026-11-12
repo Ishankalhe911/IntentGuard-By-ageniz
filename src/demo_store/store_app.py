@@ -573,7 +573,7 @@ STOREFRONT_HTML = r"""<!DOCTYPE html>
   </a>
   <div class="nav-links">
     <a class="nav-link" href="/agent" target="_blank">AI Agent Console</a>
-    <a class="nav-link cta" href="http://127.0.0.1:8000/dashboard" target="_blank">Merchant Dashboard</a>
+    <a class="nav-link cta" href="https://intentguard-by-ageniz-v37n.onrender.com/" target="_blank">Merchant Dashboard</a>
   </div>
 </nav>
 
@@ -833,7 +833,7 @@ STOREFRONT_HTML = r"""<!DOCTYPE html>
 def create_store_app(sdk: Optional[IntentGuardMerchantSDK] = None) -> FastAPI:
     if sdk is None:
         sdk = IntentGuardMerchantSDK(
-            os.getenv("INTENTGUARD_URL", "http://127.0.0.1:8000"),
+            os.getenv("INTENTGUARD_URL", "https://intentguard-by-ageniz-v37n.onrender.com/"),
             os.getenv("INTENTGUARD_MERCHANT_API_KEY"),
         )
     app = FastAPI(title="NovaCloud Merchant Store", version="0.3.0")
