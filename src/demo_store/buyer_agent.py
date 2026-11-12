@@ -192,7 +192,7 @@ def parse_buyer_prompt_with_optional_gemini(
     *,
     gemini_api_key: Optional[str] = None,
     discovered_catalog: Optional[List[Dict[str, Any]]] = None,
-    store_base_url: str = "http://127.0.0.1:8001",
+    store_base_url: str = "https://intentguard-by-ageniz-v37n.onrender.com/",
     **_kwargs: Any,
 ) -> Dict[str, Any]:
     """Live Gemini Buyer Agent Planner that discovers products strictly from the merchant store's `/api/catalog`."""
@@ -669,7 +669,7 @@ BUYER_AGENT_HTML = """<!DOCTYPE html>
   <div class="topbar-right">
     <input class="key-input" id="gemini-key-override" type="password" placeholder="Gemini API Key override (optional)"/>
     <a class="topbar-link" href="__STORE_BASE_URL__/" target="_blank">Store ↗</a>
-    <a class="topbar-link" href="http://127.0.0.1:8000/dashboard" target="_blank">Dashboard ↗</a>
+    <a class="topbar-link" href="https://intentguard-by-ageniz-v37n.onrender.com/" target="_blank">Dashboard ↗</a>
   </div>
 </div>
 
@@ -1105,7 +1105,7 @@ def execute_buyer_agent_plan(store_base_url: str, body: AgentExecuteRequest) -> 
 
 def create_buyer_agent_app(store_url: Optional[str] = None) -> FastAPI:
     """Standalone FastAPI app for the Buyer AI Agent Console (can run on :8002)."""
-    resolved_store = (store_url or os.getenv("NOVACLOUD_STORE_URL") or "http://127.0.0.1:8001").rstrip("/")
+    resolved_store = (store_url or os.getenv("NOVACLOUD_STORE_URL") or "https://intentguard-by-ageniz-v37n.onrender.com").rstrip("/")
     agent_app = FastAPI(title="IntentGuard — Buyer AI Agent Console", version="1.2.0")
 
     @agent_app.get("/", response_class=HTMLResponse)
@@ -1146,7 +1146,7 @@ def main() -> int:
     parser.add_argument("--serve", action="store_true", help="Launch the interactive Buyer Agent Web Console UI")
     parser.add_argument("--port", type=int, default=8002, help="Port for --serve Web UI (default: 8002)")
     parser.add_argument("--prompt", default=None, help="Natural-language shopping prompt for the AI Buyer Agent")
-    parser.add_argument("--store", default="http://127.0.0.1:8001", help="Merchant storefront base URL")
+    parser.add_argument("--store", default="https://intentguard-by-ageniz-v37n.onrender.com", help="Merchant storefront base URL")
     parser.add_argument("--sku", default=None, help="Catalog SKU string (or use --prompt for natural language)")
     parser.add_argument("--name", default=None, help="Optional item name")
     parser.add_argument("--amount", default=None, help="Optional unit amount")
@@ -1178,7 +1178,7 @@ def main() -> int:
 
     if args.serve:
         import uvicorn
-        uvicorn.run(create_buyer_agent_app(args.store), host="127.0.0.1", port=args.port)
+        uvicorn.run(create_buyer_agent_app(args.store), host="https://intentguard-by-ageniz-v37n.onrender.com/", port=args.port)
         return 0
 
     if args.prompt:
